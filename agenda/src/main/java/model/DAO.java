@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DAO {
 	
@@ -60,6 +62,51 @@ public class DAO {
 			
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+	}
+	
+	//CRUD READ - aula 16
+	public ArrayList<JavaBeans> listarContatos(){
+		
+		//criando um objeto para acessar a classe JavaBeans
+		ArrayList<JavaBeans> contatos = new ArrayList<>();
+		
+		String read = "select * from contatos order by nome";
+		
+		try {
+			//1 - conectando com o banco de dados
+			Connection con = conectar();
+			
+			//2 - preparando a query para o java executar no servidor
+			PreparedStatement pst = con.prepareStatement(read);
+			
+			//ResulSet faz parte do pacote JDBC, usado para armazenar o retorno do banco de dados temporariamente em um objeto
+			//o objeto rs executa a query feita na linha 70
+			//Passo 3 do diagrama da aula 16
+			ResultSet rs = pst.executeQuery();
+			
+			//para exibir o resultado usaremos o while
+			//laço sera executado enquanto houver contatos
+			while(rs.next()) {
+				//variaveis de apoio que recebem os dados do banco
+				
+				//variavel idcon atraves do objeto rs recebe o primeiro campo do banco de dados
+				String idcon = rs.getString(1);
+				String nome = rs.getString(2);
+				String fone = rs.getString(3);
+				String email = rs.getString(4);
+				
+				//preenchendo o ArrayList
+				//objeto contatos adiciona nas variaveis da classe JavaBeans o conteudo dessas variaveis
+				//Passo 5 - aula 16
+				contatos.add(new JavaBeans(idcon, nome, fone, email));
+			}
+			//encerrando a conexao com o banco
+			con.close();
+			return contatos;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
 		}
 	}
 }
