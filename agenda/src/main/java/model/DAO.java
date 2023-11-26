@@ -59,6 +59,7 @@ public class DAO {
 			pst.executeUpdate();
 			
 			//5 - encerrando a conexao com o banco
+			con.close();
 			
 		} catch (Exception e) {
 			System.out.println(e);

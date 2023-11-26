@@ -36,13 +36,15 @@ public class Controller extends HttpServlet {
 		//vamos redirecionar as requisicoes que foram configuradas no @WebServlet para metodos especificos
 		
 		//esta variavel vai armazenar o caminho da requisicao
+		//quais requisicoes esta armazenando? "/main" - "/insert" - "/select"
 		String action = request.getServletPath();
 		System.out.println(action);
 		
 		if (action.equals("/main")) {
 			contatos(request, response);
-		}else if (action.equals("/insert")){//se o conteudo da variavel action for insert, vai redirecionar ao metodo responsavel por encaminhar a camda Model
-			novoContato(request, response);
+		}else if (action.equals("/insert")){
+			//se o conteudo da variavel action for insert, vai redirecionar ao metodo responsavel por encaminhar a camda Model
+			novoContato(request, response);//aula 14
 		}else if (action.equals("/select")) {//aula 18
 			listarContato(request, response); 
 		}else {
@@ -78,17 +80,19 @@ public class Controller extends HttpServlet {
 		}
 	
 	//passo 5
-	//Novo contatos
+	//Novo contatos - aula 14
 		protected void novoContato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			System.out.println(request.getParameter("nome"));
 			System.out.println(request.getParameter("fone"));
 			System.out.println(request.getParameter("email"));
 			
+			//passo 5 da aula 14 - CREATE
 			contato.setNome(request.getParameter("nome"));
 			contato.setFone(request.getParameter("fone"));
 			contato.setEmail(request.getParameter("email"));
 			
-			//invocar o metodo inserirContato passando o objeto contato - aula 15
+			//passo 6 da aula 15 - CREATE
+			//invocar o metodo inserirContato passando o objeto contato - inserindo os dados no banco
 			dao.inserirContato(contato);
 			
 			//passo 10 - aula 15

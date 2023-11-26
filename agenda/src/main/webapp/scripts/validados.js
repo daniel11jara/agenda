@@ -3,6 +3,7 @@
  */
 function validar(){
 	//variavel nome pegando do formulario o campo nome o seu valor
+	//pegando do arquivo novo.html
 	let nome = frmContato.nome.value 
 	let fone = frmContato.fone.value
 	
