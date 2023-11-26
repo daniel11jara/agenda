@@ -104,6 +104,22 @@ public class Controller extends HttpServlet {
 			
 			//setar a variavel javabeans - passo 2 da aula 18
 			contato.setIdcon(idcon);
+			
+			//executar o metodo selecionarContato do DAO - aula 19
+			//passo 3 da aula 18
+			dao.selecionarContato(contato);
+			
+			//setar os atributos do formulario com o conteudo javabeans - aula 20
+			//passo 9 e 10
+			request.setAttribute("idcon", contato.getIdcon());
+			request.setAttribute("nome", contato.getNome());
+			request.setAttribute("fone", contato.getFone());
+			request.setAttribute("email", contato.getEmail());
+			
+			//encaminhar ao documento editar.jsp
+			RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+			rd.forward(request, response);
+			
 		}
 
 }

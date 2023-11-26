@@ -109,4 +109,34 @@ public class DAO {
 			return null;
 		}
 	}
+	
+	//CRUD UPDATE - aula 19
+	//selecionando o contato
+	public void selecionarContato(JavaBeans contato) {
+		
+		String read2 = "select * from contatos where idcon = ?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(read2);
+			//passo 4 da aula 18 - contato.getIdcon()
+			//passo 5 da aula 18 - pst.setString
+			pst.setString(1, contato.getIdcon());
+			
+			//passo 6 da aula 18 - pst.executeQuery()
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				//setando as variaves JavaBeans
+				contato.setIdcon(rs.getString(1));
+				contato.setNome(rs.getString(2));
+				contato.setFone(rs.getString(3));
+				contato.setEmail(rs.getString(4));
+			}
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }
