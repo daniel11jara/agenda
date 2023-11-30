@@ -140,4 +140,25 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
+	
+	//editar contato  - aula 21
+	public void alterarContato(JavaBeans contato) {
+		String create = "update contatos set nome=?, fone=?, email=? where idcon=?";
+		
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(create);
+			
+			//passo 16 e 17
+			pst.setString(1, contato.getNome());
+			pst.setString(2, contato.getFone());
+			pst.setString(3, contato.getEmail());
+			pst.setString(4, contato.getIdcon());
+			
+			//passo 18
+			pst.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }
