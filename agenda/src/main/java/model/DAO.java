@@ -6,17 +6,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DAO.
+ */
 public class DAO {
 	
+	/** The driver. */
 	//essa linha so funciona com o driver copiado na pasta lib
 	private String driver = "com.mysql.cj.jdbc.Driver";
+	
+	/** The url. */
 	//informando aqui o ip do servidor, o nome do banco de dados e o fuso horario de referencia universal
 	private String url = "jdbc:mysql://127.0.0.1:3306/dbagenda?userTimezone=true&serverTimezone=UTC";
+	
+	/** The user. */
 	//usuario que pode acessar o banco de dados
 	private String user = "root";
+	
+	/** The password. */
 	//senha
 	private String password = "admin";
 	
+	/**
+	 * Conectar.
+	 *
+	 * @return the connection
+	 */
 	//usando a classe Connection para fazer o metodo conectar
 	private Connection conectar() {
 		
@@ -38,6 +54,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Inserir contato.
+	 *
+	 * @param contato the contato
+	 */
 	//CREATE - aula 15
 	public void inserirContato(JavaBeans contato) {
 		String create = "insert into contatos (nome, fone, email) values (?, ?, ?)";
@@ -66,6 +87,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Listar contatos.
+	 *
+	 * @return the array list
+	 */
 	//CRUD READ - aula 16
 	public ArrayList<JavaBeans> listarContatos(){
 		
@@ -112,6 +138,11 @@ public class DAO {
 	}
 	
 	//CRUD UPDATE - aula 19
+	/**
+	 * Selecionar contato.
+	 *
+	 * @param contato the contato
+	 */
 	//selecionando o contato
 	public void selecionarContato(JavaBeans contato) {
 		
@@ -141,6 +172,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Alterar contato.
+	 *
+	 * @param contato the contato
+	 */
 	//editar contato  - aula 21
 	public void alterarContato(JavaBeans contato) {
 		String create = "update contatos set nome=?, fone=?, email=? where idcon=?";
@@ -162,6 +198,11 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Deletar contato.
+	 *
+	 * @param contato the contato
+	 */
 	//CRUD - DELETE - aula 23
 	public void deletarContato(JavaBeans contato) {
 		String delete = "delete from contatos where idcon = ?";
